@@ -1,4 +1,6 @@
-class Bomb {
+let LivingCreature = require('./LivingCreatue')
+
+module.experts = class Bomb {
     constructor(x, y) {
         this.x = x;
         this.y = y;

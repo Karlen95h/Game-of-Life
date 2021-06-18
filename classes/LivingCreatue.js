@@ -1,4 +1,6 @@
-class LivingCreature {
+let LivingCreature = require('./LivingCreatue')
+
+module.experts =class LivingCreature {
     constructor(x, y) {
         this.x = x;
         this.y = y;

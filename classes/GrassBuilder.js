@@ -1,4 +1,5 @@
-class GrassBuilder extends LivingCreature {
+let LivingCreature = require('./LivingCreatue')
+module.experts = class GrassBuilder extends LivingCreature {
     constructor(x, y) {
         super(x, y)
         this.x = x;
