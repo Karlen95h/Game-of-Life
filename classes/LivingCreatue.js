@@ -1,6 +1,5 @@
-let LivingCreature = require('./LivingCreatue')
 
-module.experts =class LivingCreature {
+module.exports = class LivingCreature {
     constructor(x, y) {
         this.x = x;
         this.y = y;

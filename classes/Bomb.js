@@ -1,6 +1,6 @@
 let LivingCreature = require('./LivingCreatue')
 
-module.experts = class Bomb {
+module.exports = class Bomb {
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -70,7 +70,7 @@ module.experts = class Bomb {
     }
     mul() {
         let found = this.chooseCell(0, 1, 2, 3, 4);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact) {
             this.radius++;

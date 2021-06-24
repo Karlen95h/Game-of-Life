@@ -1,5 +1,5 @@
 let LivingCreature = require('./LivingCreatue')
-module.experts = class GrassEater extends LivingCreature {
+module.exports = class GrassEater extends LivingCreature {
     constructor(x, y) {
         super(x , y)
         this.x = x;
@@ -31,7 +31,7 @@ module.experts = class GrassEater extends LivingCreature {
     
     mul() {
         let found = this.chooseCell(0);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact && this.energy > 8) {
             let x = exact[0];
@@ -48,7 +48,7 @@ module.experts = class GrassEater extends LivingCreature {
     }
     eat() {
         let found = this.chooseCell(1);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact) {
             this.energy += 5;
@@ -76,7 +76,7 @@ module.experts = class GrassEater extends LivingCreature {
     }
     move() {
         let found = this.chooseCell(0);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact) {
             let x = exact[0];

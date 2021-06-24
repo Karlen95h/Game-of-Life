@@ -1,5 +1,5 @@
 let LivingCreature = require('./LivingCreatue')
-module.experts = class GrassBuilder extends LivingCreature {
+module.exports = class GrassBuilder extends LivingCreature {
     constructor(x, y) {
         super(x, y)
         this.x = x;
@@ -22,7 +22,7 @@ module.experts = class GrassBuilder extends LivingCreature {
    
     eat() {
         let found = this.chooseCell(0);
-        let exact = random(found)
+        let exact = found[Math.floor(Math.random() * found.length)]
 
         if (exact) {
             let x = exact[0];
