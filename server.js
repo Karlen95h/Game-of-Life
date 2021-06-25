@@ -13,7 +13,7 @@ server.listen(3000, () => {
     console.log('connected');
 });
 
-let matrixSize = 30
+let matrixSize = 50
  matrix = [];
  grassArr = [];
  grassEaterArr = [];
@@ -29,9 +29,9 @@ var GrassBuilder = require("./classes/GrassBuilder")
 var AmenaGrassEater = require("./classes/AmenaGrassEater")
 
     function matrixGenerator() {
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < matrixSize; i++) {
             matrix[i] = []
-            for (let o = 0; o < 30; o++) {
+            for (let o = 0; o < matrixSize; o++) {
                 matrix[i][o] = 0;
             }
         }
