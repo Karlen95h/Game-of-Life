@@ -59,3 +59,23 @@ setInterval(
     socket.on('send matrix', nkarel)
     },1000
 )
+
+// function AddGrass() {
+//     socket.emit("Grass")
+// }
+
+// function AddBuilder() {
+//     socket.emit("Builder")
+// }
+
+// function AddAmenaEater() {
+//     socket.emit("Builder")
+// }
+
+// function AddGrassEater() {
+//     socket.emit("GrassEater")
+// }
+
+// function AddBomb() {
+//     socket.emit("Bomb")
+// }

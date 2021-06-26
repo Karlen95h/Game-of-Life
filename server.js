@@ -122,6 +122,121 @@ function game() {
 
 setInterval(game, 1000)
 
-io.on('connection', function () {
+function AddGrass() {
+    for (let i = 0; i < 1; i++) {
+        let x = Math.floor(Math.random() * matrix[0].length)
+        let y = Math.floor(Math.random() * matrix.length)
+        matrix[y][x] = 1;
+    }
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+
+            if (matrix[y][x] == 1) {
+                let gr = new Grass(x, y);
+                grassArr.push(gr);
+            }
+
+        }
+    io.sockets.emit("send matrix", matrix);
+
+    }
+}
+function AddGrassEater() {
+    for (let i = 0; i < 1; i++) {
+        let x = Math.floor(Math.random() * matrix[0].length)
+        let y = Math.floor(Math.random() * matrix.length)
+        matrix[y][x] = 2;
+    }
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+
+            if (matrix[y][x] == 2) {
+                let eater = new GrassEater(x, y);
+                grassEaterArr.push(eater);
+            }
+
+        }
+    io.sockets.emit("send matrix", matrix);
+
+    }
+}
+function AddAmenaEater() {
+    for (let i = 0; i < 1; i++) {
+        let x = Math.floor(Math.random() * matrix[0].length)
+        let y = Math.floor(Math.random() * matrix.length)
+        matrix[y][x] = 3;
+    }
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 3) {
+                let amena = new AmenaGrassEater(x, y);
+                amenaEaterArr.push(amena);
+            }
+
+        }
+    io.sockets.emit("send matrix", matrix);
+
+    }
+}
+function AddBuilder() {
+    for (let i = 0; i < 1; i++) {
+        let x = Math.floor(Math.random() * matrix[0].length)
+        let y = Math.floor(Math.random() * matrix.length)
+        matrix[y][x] = 4;
+
+    }
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 4) {
+                let build = new GrassBuilder(x, y);
+                grassBuilderArr.push(build);
+            }
+
+        }
+    io.sockets.emit("send matrix", matrix);
+
+    }
+}
+function AddBomb() {
+    for (let i = 0; i < 1; i++) {
+        let x = Math.floor(Math.random() * matrix[0].length)
+        let y = Math.floor(Math.random() * matrix.length)
+        matrix[y][x] = 5;
+
+    }
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
+            if (matrix[y][x] == 5) {
+                let bomb = new Bomb(x, y);
+                BombArr.push(bomb);
+            }
+
+        }
+    io.sockets.emit("send matrix", matrix);
+
+    }
+}
+io.on('connection', function (socket) {
     createObject(matrix)
+    socket.on('Grass', AddGrass())
+    socket.on('Grass Eater', AddGrassEater())
+    socket.on('Builder', AddBuilder())
+    socket.on('AmenaEater', AddAmenaEater())
+    socket.on('Grass', AddBomb())
+
 })
+
+
+var statistics = {};
+
+setInterval(function() {
+    statistics.grass = grassArr.length;
+    statistics.grassEater = grassEaterArr.length;
+    statistics.amenaEaterArr = amenaEaterArr.length;
+    statistics.grassBuilderArr = grassBuilderArr.length;
+    statistics.BombArr = BombArr.length;
+
+    fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
+        console.log("send")
+    })
+},1000)
