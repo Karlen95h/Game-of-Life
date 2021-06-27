@@ -60,7 +60,7 @@ var AmenaGrassEater = require("./classes/AmenaGrassEater")
     matrixGenerator()
     AddRandom(5, 5, 5)
  
-    io.sockets.emit("send matrix", matrix);
+    io.sockets.emit("send matrix",  matrix);
 
 
     function createObject(matrix){
@@ -123,7 +123,7 @@ function game() {
 setInterval(game, 1000)
 
 function AddGrass() {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
         let x = Math.floor(Math.random() * matrix[0].length)
         let y = Math.floor(Math.random() * matrix.length)
         matrix[y][x] = 1;
@@ -142,7 +142,7 @@ function AddGrass() {
     }
 }
 function AddGrassEater() {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
         let x = Math.floor(Math.random() * matrix[0].length)
         let y = Math.floor(Math.random() * matrix.length)
         matrix[y][x] = 2;
@@ -161,7 +161,7 @@ function AddGrassEater() {
     }
 }
 function AddAmenaEater() {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
         let x = Math.floor(Math.random() * matrix[0].length)
         let y = Math.floor(Math.random() * matrix.length)
         matrix[y][x] = 3;
@@ -179,7 +179,7 @@ function AddAmenaEater() {
     }
 }
 function AddBuilder() {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
         let x = Math.floor(Math.random() * matrix[0].length)
         let y = Math.floor(Math.random() * matrix.length)
         matrix[y][x] = 4;
@@ -198,7 +198,7 @@ function AddBuilder() {
     }
 }
 function AddBomb() {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
         let x = Math.floor(Math.random() * matrix[0].length)
         let y = Math.floor(Math.random() * matrix.length)
         matrix[y][x] = 5;
@@ -218,11 +218,11 @@ function AddBomb() {
 }
 io.on('connection', function (socket) {
     createObject(matrix)
-    socket.on('Grass', AddGrass())
-    socket.on('Grass Eater', AddGrassEater())
-    socket.on('Builder', AddBuilder())
-    socket.on('AmenaEater', AddAmenaEater())
-    socket.on('Grass', AddBomb())
+    socket.on('Grass', AddGrass)
+    socket.on('Grass Eater', AddGrassEater)
+    socket.on('Builder', AddBuilder)
+    socket.on('AmenaEater', AddAmenaEater)
+    socket.on('Bomb', AddBomb)
 
 })
 
@@ -240,3 +240,20 @@ setInterval(function() {
         console.log("send")
     })
 },1000)
+   weath = 'spring'
+function weather() {
+    if (weath == "winter") {
+        weath = "spring"
+    }
+    else if (weath == "spring") {
+        weath = "summer"
+    }
+    else if (weath == "summer") {
+        weath = "autumn"
+    }
+    else if (weath == "autumn") {
+        weath = "winter"
+    }
+    io.sockets.emit('weather', weath)
+}
+setInterval(weather, 5000);
